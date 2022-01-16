@@ -2,7 +2,7 @@
     <default-field :field="field" :errors="errors">
         <template slot="field">
 
-            <div :class="{'flex flex-wrap' : !field.stack, 'border-danger': hasError}">
+            <div class="pt-2" :class="{'flex flex-wrap' : !field.stack, 'border-danger': hasError}">
                 <div v-for="(option, val) in field.options" :class="{'mb-2' : field.stack || field.addPadding}"  class="mlbz-radio-container">
                     <label :for="`${field.attribute}_${val}`">
                         <input class="checkbox" v-model="value" :value="val" :id="`${field.attribute}_${val}`" :name="field.attribute" type="radio" :disabled="field.disabled">
