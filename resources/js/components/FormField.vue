@@ -6,7 +6,7 @@
                 <div v-for="(option, val) in field.options" :class="{'mb-2' : field.stack || field.addPadding}"  class="mlbz-radio-container">
                     <label class="flex items-center" :for="`${field.attribute}_${val}`">
                         <input class="checkbox" v-model="value" :value="val" :id="`${field.attribute}_${val}`" :name="field.attribute" type="radio" :disabled="field.disabled">
-                        <span class="mlbz-radio-label">{{ getOptionLabel(option) }}</span>
+                        <span class="cursor-pointer mlbz-radio-label">{{ getOptionLabel(option) }}</span>
                         <span v-if="field.stack && hasOptionHint(option)" class="mlbz-radio-hint mt-1 block text-sm text-80 leading-normal">{{ getOptionHint(option) }}</span>
                     </label>
                 </div>
@@ -49,15 +49,22 @@
 					return this.value = this.field.default;
 				}
 
-				return this.value = '';
+				return this.value = null;
             },
 
             /**
              * Fill the given FormData object with the field's internal value.
              */
             fill(formData) {
-                const value = this.value !== null ? this.value : this.field.default;
-                formData.append(this.field.attribute, value);
+                const value = this.value !== null 
+                    ? this.value 
+                    : this.field.default !== null 
+                        ? this.field.default
+                        : null;
+                
+                if (value) {
+                    formData.append(this.field.attribute, value);
+                }
             },
 
         }
