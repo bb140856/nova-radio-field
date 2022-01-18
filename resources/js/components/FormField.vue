@@ -49,7 +49,7 @@
 					return this.value = this.field.default;
 				}
 
-				return this.value = ''
+				return this.value = '';
             },
 
             /**
